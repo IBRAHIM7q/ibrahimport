@@ -1,0 +1,182 @@
+.scroll-stack-scroller {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: visible;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: scroll-position;
+}
+
+.scroll-stack-inner {
+  position: relative;
+  width: 100%;
+  padding-top: 10vh;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-bottom: 10rem;
+  min-height: 100vh;
+}
+
+.scroll-stack-card {
+  position: relative;
+  width: 100%;
+  height: 18.75rem;
+  margin: 1.5rem 0;
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+  background: linear-gradient(135deg, rgba(0, 255, 136, 0.05) 0%, rgba(16, 185, 129, 0.08) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  box-shadow: 
+    0 0 30px rgba(0, 255, 136, 0.1),
+    0 0 60px rgba(0, 255, 136, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-origin: top center;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  will-change: transform, filter;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+.scroll-stack-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 1.25rem;
+  background: linear-gradient(135deg, 
+    transparent 0%, 
+    rgba(0, 255, 136, 0.03) 50%, 
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.scroll-stack-card:hover {
+  background: linear-gradient(135deg, rgba(0, 255, 136, 0.08) 0%, rgba(16, 185, 129, 0.12) 100%);
+  border-color: rgba(0, 255, 136, 0.4);
+  box-shadow: 
+    0 0 40px rgba(0, 255, 136, 0.2),
+    0 0 80px rgba(0, 255, 136, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.scroll-stack-card:hover::before {
+  opacity: 1;
+}
+
+.scroll-stack-card:active {
+  transform: translateY(0);
+  box-shadow: 
+    0 0 20px rgba(0, 255, 136, 0.15),
+    0 0 40px rgba(0, 255, 136, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.scroll-stack-end {
+  height: 1px;
+  width: 100%;
+}
+
+/* Scrollbar styling */
+.scroll-stack-scroller::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-stack-scroller::-webkit-scrollbar-track {
+  background: rgba(0, 255, 136, 0.05);
+  border-radius: 4px;
+}
+
+.scroll-stack-scroller::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(0, 255, 136, 0.3) 0%, rgba(16, 185, 129, 0.5) 100%);
+  border-radius: 4px;
+  border: 1px solid rgba(0, 255, 136, 0.2);
+}
+
+.scroll-stack-scroller::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(0, 255, 136, 0.5) 0%, rgba(16, 185, 129, 0.7) 100%);
+  border-color: rgba(0, 255, 136, 0.4);
+}
+
+/* Responsive adjustments */
+@media (min-width: 480px) {
+  .scroll-stack-inner {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  
+  .scroll-stack-card {
+    height: 20rem;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    margin: 2rem 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .scroll-stack-inner {
+    padding-top: 15vh;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    padding-bottom: 15rem;
+  }
+  
+  .scroll-stack-card {
+    height: 21.875rem;
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .scroll-stack-inner {
+    padding-top: 20vh;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    padding-bottom: 20rem;
+  }
+  
+  .scroll-stack-card {
+    height: 25rem;
+    padding: 3rem;
+    border-radius: 2rem;
+  }
+}
+
+/* Performance optimizations */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-stack-card {
+    transition: none;
+    transform: none;
+  }
+  
+  .scroll-stack-card:hover {
+    transform: none;
+  }
+  
+  .scroll-stack-card::before {
+    transition: none;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .scroll-stack-card {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
